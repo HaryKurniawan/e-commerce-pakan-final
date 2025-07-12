@@ -1,0 +1,417 @@
+/* components/Payment.css */
+.payment-container {
+  max-width: 800px;
+  padding-top: 70px;
+}
+
+.payment-method-section {
+  border-radius: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #e5e7eb;
+}
+
+.payment-method-header {
+  margin-bottom: 20px;
+}
+
+.payment-method-header h3 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #1f2937;
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.payment-icon {
+  width: 20px;
+  height: 20px;
+  color: #3b82f6;
+}
+
+.payment-method-details {
+  border-radius: 8px;
+}
+
+.payment-method-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.bank-code-badge {
+  background-color: #3b82f6;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.bank-info {
+  flex: 1;
+}
+
+.bank-name-title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.bank-subtitle {
+  margin: 5px 0 0 0;
+  color: #6b7280;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.account-details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.account-number-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+}
+.account-name-card{
+  margin-bottom: 10px;
+}
+
+.account-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.account-section {
+  flex: 1;
+}
+
+.account-label {
+  margin: 0 0 5px 0;
+  font-size: 12px;
+  color: #6b7280;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.account-number {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+  font-family: 'Courier New', monospace;
+}
+
+.account-name-text {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.copy-button {
+  background-color: #353535;
+  color: white;
+  border: none;
+  padding: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.copy-button:hover {
+  background-color: #2563eb;
+}
+
+.copy-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.copy-icon.success {
+  color: #10b981;
+}
+
+.copy-success-message {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #10b981;
+  font-size: 14px;
+  font-weight: 500;
+  background-color: #ecfdf5;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #a7f3d0;
+}
+
+.success-icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* Payment Amount Section */
+.payment-amount-section {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 25px;
+  border: 1px solid #e5e7eb;
+}
+
+.payment-amount-section h3 {
+  color: #1f2937;
+  margin: 0 0 20px 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.payment-amount-details {
+  background-color: #f8fafc;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.amount-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.amount-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+}
+
+.amount-label {
+  font-size: 16px;
+  color: #374151;
+}
+
+.amount-value {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+/* Payment Proof Section */
+.payment-proof-section {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 25px;
+  border: 1px solid #e5e7eb;
+}
+
+.payment-proof-section h3 {
+  color: #1f2937;
+  margin: 0 0 20px 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.upload-area {
+  margin-bottom: 20px;
+}
+
+.bank-logo-badge {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.upload-label {
+  display: block;
+  border: 2px dashed #d1d5db;
+  border-radius: 8px;
+  padding: 40px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  background-color: #f9fafb;
+}
+
+.upload-label:hover {
+  border-color: #3b82f6;
+  background-color: #f0f9ff;
+}
+
+.upload-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.upload-icon {
+  width: 48px;
+  height: 48px;
+  color: #6b7280;
+}
+
+.upload-text {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: #374151;
+}
+
+.upload-note {
+  margin: 0;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.upload-input {
+  display: none;
+}
+
+.preview-container {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #ffffff;
+}
+
+.preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: #f8fafc;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.preview-header h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.remove-button {
+  background-color: #ef4444;
+  color: white;
+  border: none;
+  padding: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.remove-button:hover {
+  background-color: #dc2626;
+}
+
+.remove-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.preview-image-container {
+  padding: 20px;
+  text-align: center;
+}
+
+.preview-image {
+  max-width: 100%;
+  max-height: 300px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+}
+
+.file-info {
+  padding: 15px 20px;
+  background-color: #f8fafc;
+  border-top: 1px solid #e5e7eb;
+}
+
+.file-name {
+  margin: 0 0 5px 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: #1f2937;
+}
+
+.file-size {
+  margin: 0;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.upload-instructions {
+  background-color: #f8fafc;
+  border-radius: 8px;
+  padding: 20px;
+  border: 1px solid #e5e7eb;
+}
+
+.upload-instructions h5 {
+  margin: 0 0 15px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.upload-instructions ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.upload-instructions li {
+  margin-bottom: 8px;
+  color: #374151;
+  font-size: 14px;
+}
+
+/* Payment Submit Section */
+.payment-submit-section {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 25px;
+  border: 1px solid #e5e7eb;
+  text-align: center;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 15px 30px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.submit-button-disabled {
+  background-color: #d1d5db;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.submit-warning {
+  margin: 0;
+  font-size: 14px;
+  color: #ef4444;
+  font-style: italic;
+}
+
+/* Loading State */
+.payment-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  font-size: 16px;
+  color: #6b7280;
+}
+

@@ -1,0 +1,125 @@
+
+/* Container profil */
+.form {
+  padding-top: 80px;
+  max-width: 600px;
+  border-radius: 12px;
+  color: #0f172a;
+}
+
+/* Judul */
+.form h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #0f172a;
+}
+
+/* Info profil */
+.profile-info {
+  margin-bottom: 1.5rem;
+  line-height: 2px;
+}
+
+.profile-info h5{
+  font-size: 16px;
+  font-weight: 500;
+}
+.profile-info p {
+  font-size: 12px;
+  margin-top: -6px;
+}
+
+.profile-info strong {
+  font-weight: 600;
+  color: #475569;
+}
+
+/* Tombol */
+.button {
+  background-color: #3b82f6;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  text-decoration: none;
+  border: none;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.button:hover {
+  background-color: #2563eb;
+}
+
+/* Tombol logout */
+.button.danger {
+  background-color: #ef4444;
+}
+
+.button.danger:hover {
+  background-color: #dc2626;
+}
+
+/* Kontainer aksi tombol */
+.form .actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.profile-actions{
+  display: flex;
+  justify-content: space-between;
+  text-decoration: none;
+  cursor: pointer;
+  margin-top: -14px;
+  font-size: 14px;
+
+}
+
+.profile-actions button{
+  border: none;
+  background-color: transparent;
+}
+
+.contain-action-menu{
+  background-color: #fff;
+  padding: 20px 20px 10px 20px;
+  border-radius: 16px;
+  border-bottom: 1px solid #ECECEC;
+
+
+}
+.contain-profileImage{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.profileImage{
+  width: 100px;
+  height: 100px;
+  background-color: #cbcbcb;
+  border-radius: 100px;
+  text-align: center;
+}
+
+.modal-content-bottom-btn{
+  width: 100%;
+  text-align: end;
+  padding: 10px 0;
+}
+
+.modal-content-bottom-btn button{
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}

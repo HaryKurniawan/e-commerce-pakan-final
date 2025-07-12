@@ -1,0 +1,234 @@
+/* Login Page Styling */
+.login-form-container {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+}
+
+.login-form-container h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #1f2937;
+  font-size: 1.75rem;
+  font-weight: 600;
+}
+
+/* Input Fields */
+.login-input-field {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  margin-bottom: 1rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 100px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  background-color: #ffffff;
+}
+
+.login-input-field:focus {
+  outline: none;
+}
+
+.login-input-field::placeholder {
+  color: #9ca3af;
+}
+
+/* Password Field Wrapper */
+.login-password-wrapper {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.login-password-field {
+  padding-right: 3rem;
+  margin-bottom: 0;
+}
+
+.login-password-visibility-toggle {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+}
+
+.login-password-visibility-toggle:hover {
+  background-color: #f3f4f6;
+}
+
+.login-password-visibility-toggle:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Forgot Password Link */
+.login-forgot-password-link {
+  display: block;
+  text-align: left;
+  margin-bottom: 1.5rem;
+  color: #313131;
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: color 0.2s ease;
+}
+
+.login-forgot-password-link:hover {
+  color: #202020;
+  text-decoration: underline;
+}
+
+/* Submit Button */
+.login-submit-btn {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  background: #2c2c2c;
+  color: white;
+  border: none;
+  border-radius: 100px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 1.5rem;
+}
+
+.login-submit-btn:hover:not(:disabled) {
+    background: #1d1d1d;
+
+  transform: translateY(-1px);
+}
+
+.login-submit-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.login-submit-btn:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Register Prompt */
+.login-register-prompt {
+  text-align: center;
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+.login-register-link {
+  color: #2a2a2a;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.login-register-link:hover {
+  color: #222222;
+  text-decoration: underline;
+}
+
+/* Modal Styles */
+.login-modal-content {
+  text-align: center;
+  padding: 1rem;
+}
+
+.login-modal-illustration-wrapper {
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.login-modal-svg-icon {
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
+}
+
+.login-modal-message {
+  font-size: 1rem;
+  color: #4b5563;
+  margin-bottom: 2rem;
+  line-height: 1.5;
+}
+
+.login-modal-action-btn {
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  color: white;
+  border: none;
+  border-radius: 100px;
+  padding: 0.75rem 2rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 100px;
+}
+
+.login-modal-action-btn:hover {
+  background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .login-form-container {
+    margin: 1rem;
+    padding: 1.5rem;
+    max-width: none;
+margin-top: 120px;
+  }
+  
+  .login-form-container h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .login-input-field {
+    padding: 0.75rem;
+    font-size: 0.875rem;
+  }
+  
+  .login-submit-btn {
+    padding: 0.75rem;
+    font-size: 0.875rem;
+  }
+}
+
+
+
+/* Loading Animation */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.login-submit-btn:disabled::after {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-left: 8px;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: spin 1s linear infinite;
+}
+
+/* Focus styles for accessibility */
+.login-input-field:focus,
+.login-submit-btn:focus,
+.login-forgot-password-link:focus,
+.login-register-link:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}

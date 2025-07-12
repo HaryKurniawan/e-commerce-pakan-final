@@ -1,0 +1,315 @@
+/* Payment Method Dropdown Styles */
+.payment-dropdown-container {
+  width: 100%;
+  max-width: 28rem;
+  margin: 0 auto;
+}
+
+.payment-dropdown-content {
+  width: 100%;
+  z-index: 1000;
+
+}
+
+.payment-header {
+  margin-bottom: 6px;
+}
+
+.payment-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.payment-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+/* Dropdown Styles */
+.dropdown-wrapper {
+  position: relative;
+}
+
+.dropdown-button {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #e0e2e4;
+  border-radius: 10px;
+  background: #f9f9f900;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.dropdown-button:hover {
+  border-color: #9ca3af;
+}
+
+.dropdown-selected {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.bank-logo {
+  font-size: 1.25rem;
+}
+
+.bank-name {
+  font-weight: 500;
+}
+
+.placeholder-text {
+  color: #6b7280;
+}
+
+.dropdown-arrow {
+  width: 1.25rem;
+  height: 1.25rem;
+  transition: transform 0.2s ease;
+}
+
+.dropdown-arrow.rotated {
+  transform: rotate(180deg);
+}
+
+.dropdown-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 0.25rem;
+  background: white;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  z-index: 10;
+}
+
+.dropdown-option {
+  width: 100%;
+  padding: 0.75rem;
+  text-align: left;
+  background: none;
+  border: none;
+  border-bottom: 1px solid #f3f4f6;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: background-color 0.2s ease;
+}
+
+.dropdown-option:hover {
+  background-color: #f9fafb;
+}
+
+.dropdown-option:last-child {
+  border-bottom: none;
+}
+
+.option-logo {
+  font-size: 1.25rem;
+}
+
+.option-details {
+  flex: 1;
+}
+
+.option-name {
+  font-weight: 500;
+  color: #1f2937;
+  margin-bottom: 0.125rem;
+}
+
+.option-type {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+/* Payment Details Styles */
+.payment-details {
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 16px;
+  border: 1px solid #d3d3d3;
+}
+
+.payment-details-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  gap: 0.75rem;
+}
+
+.bank-code-badge {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 0.875rem;
+}
+
+.bank-info {
+  text-align: start;
+  line-height: 1;
+}
+
+.bank-name-title {
+  font-weight: 500;
+  color: #1f2937;
+  margin: 0 0 0.125rem 0;
+}
+
+.bank-subtitle {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+.account-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.account-number-card, .account-name-card {
+  background: white;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+}
+
+/* Mobile Responsive - Account Info Container */
+.account-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  min-height: 2rem;
+}
+
+.account-label {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin: 0 0 0.25rem 0;
+}
+
+.account-number {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: #1f2937;
+  letter-spacing: 0.05em;
+  margin: 0;
+  flex: 1;
+  min-width: 0; /* Allows text to shrink */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.account-name-text {
+  font-weight: 500;
+  color: #1f2937;
+  margin: 0;
+}
+
+/* Copy Button Styles - Mobile Optimized */
+.copy-button {
+  padding: 0.5rem;
+  color: #2563eb;
+  background: none;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  flex-shrink: 0; /* Prevents button from shrinking */
+
+}
+
+.copy-button:hover {
+  background-color: #dbeafe;
+}
+
+.copy-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.copy-icon.success {
+  color: #16a34a;
+}
+
+.copy-success-message {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: #16a34a;
+  font-size: 0.875rem;
+}
+
+.success-icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* Instructions Styles */
+.payment-instructions {
+  background-color: #dbeafe;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid #bfdbfe;
+}
+
+.instructions-title {
+  font-weight: 500;
+  color: #1e40af;
+  margin: 0 0 0.5rem 0;
+}
+
+.instructions-list {
+  color: #1e40af;
+  font-size: 0.875rem;
+  margin: 0;
+  padding-left: 1rem;
+  list-style: none;
+}
+
+.instructions-list li {
+  margin-bottom: 0.25rem;
+}
+
+.instructions-list li:last-child {
+  margin-bottom: 0;
+}
+
+.bank-code-logo {
+  width: 60px;
+  height: 40px;
+  object-fit: contain;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+.payment-details-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.bank-logo-details {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  border-radius: 8px;
+}

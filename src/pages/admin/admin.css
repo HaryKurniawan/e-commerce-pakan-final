@@ -1,0 +1,217 @@
+/* Admin Panel Styles */
+.modern-admin-panel {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f8fafc;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.admin-sidebar {
+  width: 280px;
+  background: white;
+  border-right: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  box-shadow: 2px 0 4px rgba(0, 0, 0, 0.02);
+}
+
+.sidebar-header {
+  padding: 24px 20px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.sidebar-header h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a202c;
+}
+
+.sidebar-nav {
+  flex: 1;
+  padding: 16px 0;
+}
+
+
+
+.nav-icon {
+  margin-right: 12px;
+  font-size: 16px;
+  width: 20px;
+  text-align: center;
+}
+
+.nav-label {
+  flex: 1;
+}
+
+.sidebar-footer {
+  padding: 16px 0;
+  border-top: 1px solid #e2e8f0;
+}
+
+.logout-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 14px 20px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+  color: #ef4444;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.logout-button:hover {
+  background-color: #fef2f2;
+  color: #dc2626;
+}
+
+.admin-main {
+  flex: 1;
+  margin-left: 280px;
+  padding: 32px;
+  max-width: calc(100vw - 280px);
+  overflow-x: auto;
+}
+
+.admin-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.content-header {
+  margin-bottom: 32px;
+}
+
+.content-header h2 {
+  margin: 0 0 8px 0;
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a202c;
+}
+
+.content-header p {
+  margin: 0;
+  color: #64748b;
+  font-size: 16px;
+}
+
+/* Override untuk komponen antd */
+.ant-modal-confirm .ant-modal-confirm-btns .ant-btn-primary {
+  background-color: #475569 !important;
+  border-color: #475569 !important;
+}
+
+.ant-modal-confirm .ant-modal-confirm-btns .ant-btn-primary:hover {
+  background-color: #334155 !important;
+  border-color: #334155 !important;
+}
+
+/* Override untuk button dan form elements global */
+.admin-content button[type="submit"] {
+  background-color: #475569 !important;
+  border-color: #475569 !important;
+  color: white !important;
+}
+
+.admin-content button[type="submit"]:hover {
+  background-color: #334155 !important;
+  border-color: #334155 !important;
+}
+
+.admin-content .ant-btn-primary {
+  background-color: #475569 !important;
+  border-color: #475569 !important;
+}
+
+.admin-content .ant-btn-primary:hover {
+  background-color: #334155 !important;
+  border-color: #334155 !important;
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+  .admin-sidebar {
+    width: 260px;
+  }
+  
+  .admin-main {
+    margin-left: 260px;
+    padding: 24px;
+    max-width: calc(100vw - 260px);
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-sidebar {
+    width: 240px;
+  }
+  
+  .admin-main {
+    margin-left: 240px;
+    padding: 16px;
+    max-width: calc(100vw - 240px);
+  }
+  
+  .content-header h2 {
+    font-size: 24px;
+  }
+  
+  .nav-item {
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+  
+  .sidebar-header {
+    padding: 20px 16px;
+  }
+  
+  .logout-button {
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 640px) {
+  .admin-sidebar {
+    width: 70px;
+  }
+  
+  .admin-main {
+    margin-left: 70px;
+    max-width: calc(100vw - 70px);
+  }
+  
+  .nav-label,
+  .sidebar-header h3 {
+    display: none;
+  }
+  
+  .nav-item {
+    justify-content: center;
+    padding: 12px 8px;
+  }
+  
+  .nav-icon {
+    margin-right: 0;
+  }
+  
+  .sidebar-header {
+    padding: 16px 8px;
+    text-align: center;
+  }
+  
+  .logout-button {
+    justify-content: center;
+    padding: 12px 8px;
+  }
+}

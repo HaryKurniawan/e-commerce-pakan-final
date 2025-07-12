@@ -1,0 +1,39 @@
+.form-contain{
+    width: 100%;
+    padding-top: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-edit-profile{
+    width: 100%;
+   max-width: 400px;
+
+}
+
+
+.form-edit-profile input{
+    width: 93%;
+}
+
+.input-edit-profile{
+   padding: 14px 16px;
+   margin-bottom: 8px;
+   border: none;
+   border-radius: 16px;
+   max-width: 400px;
+   font-size: 12px;
+   background-color: #fbfbfb;
+  border: 1px solid #e2e2e2;
+
+}
+
+.button-edit-profile{
+    background-color: #2a2a2a;
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 100px;
+    cursor: pointer;
+    margin-top: 10px;
+}

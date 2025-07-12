@@ -1,0 +1,16 @@
+:root {
+  --color-secondary: #A1A1A1;           /* Warna teks link "Isi alamat sekarang?" */
+  --color-background: #F6F6F6;          /* Warna latar belakang -----*/
+  --color-primary: #2C2C2C;             /* Warna tombol Register dan teks penting ------ */
+  --color-text: #71726F;                /* Warna teks utama ------ */
+  --color-background-component: #ffff;  /* Warna latar belakang --- */
+  --color-border: #D9D9D9;              /* Jika ada border tambahan  */ 
+}
+
+
+body {
+  background-color: var(--color-background);
+  margin: 0;
+  display: flex;
+  place-items: center;
+}

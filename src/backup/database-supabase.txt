@@ -1,0 +1,193 @@
+-- WARNING: This schema is for context only and is not meant to be run.
+-- Table order and constraints may not be valid for execution.
+
+CREATE TABLE public.cart_items (
+  id integer NOT NULL DEFAULT nextval('cart_items_id_seq'::regclass),
+  cart_id integer,
+  product_id integer,
+  jumlah integer NOT NULL,
+  CONSTRAINT cart_items_pkey PRIMARY KEY (id),
+  CONSTRAINT cart_items_product_id_fkey FOREIGN KEY (product_id) REFERENCES public.products(id),
+  CONSTRAINT cart_items_cart_id_fkey FOREIGN KEY (cart_id) REFERENCES public.carts(id)
+);
+CREATE TABLE public.carts (
+  id integer NOT NULL DEFAULT nextval('carts_id_seq'::regclass),
+  user_id integer UNIQUE,
+  tanggal timestamp without time zone DEFAULT now(),
+  created_at timestamp without time zone DEFAULT now(),
+  updated_at timestamp without time zone DEFAULT now(),
+  CONSTRAINT carts_pkey PRIMARY KEY (id),
+  CONSTRAINT carts_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id)
+);
+CREATE TABLE public.kecamatan (
+  id integer NOT NULL DEFAULT nextval('kecamatan_id_seq'::regclass),
+  kota_kabupaten_id integer,
+  nama character varying NOT NULL,
+  created_at timestamp without time zone DEFAULT now(),
+  updated_at timestamp without time zone DEFAULT now(),
+  CONSTRAINT kecamatan_pkey PRIMARY KEY (id),
+  CONSTRAINT kecamatan_kota_kabupaten_id_fkey FOREIGN KEY (kota_kabupaten_id) REFERENCES public.kota_kabupaten(id)
+);
+CREATE TABLE public.kota_kabupaten (
+  id integer NOT NULL DEFAULT nextval('kota_kabupaten_id_seq'::regclass),
+  provinsi_id integer,
+  nama character varying NOT NULL,
+  created_at timestamp without time zone DEFAULT now(),
+  updated_at timestamp without time zone DEFAULT now(),
+  CONSTRAINT kota_kabupaten_pkey PRIMARY KEY (id),
+  CONSTRAINT kota_kabupaten_provinsi_id_fkey FOREIGN KEY (provinsi_id) REFERENCES public.provinsi(id)
+);
+CREATE TABLE public.order_items (
+  id integer NOT NULL DEFAULT nextval('order_items_id_seq'::regclass),
+  order_id integer,
+  product_id integer,
+  quantity integer NOT NULL,
+  price numeric NOT NULL,
+  subtotal numeric NOT NULL,
+  created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT order_items_pkey PRIMARY KEY (id),
+  CONSTRAINT order_items_order_id_fkey FOREIGN KEY (order_id) REFERENCES public.orders(id),
+  CONSTRAINT order_items_product_id_fkey FOREIGN KEY (product_id) REFERENCES public.products(id)
+);
+CREATE TABLE public.order_reviews (
+  id integer NOT NULL DEFAULT nextval('order_reviews_id_seq'::regclass),
+  user_id integer,
+  order_id integer,
+  rating integer NOT NULL CHECK (rating >= 1 AND rating <= 5),
+  ulasan text NOT NULL,
+  tanggal timestamp without time zone DEFAULT now(),
+  created_at timestamp without time zone DEFAULT now(),
+  updated_at timestamp without time zone DEFAULT now(),
+  CONSTRAINT order_reviews_pkey PRIMARY KEY (id),
+  CONSTRAINT order_reviews_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id),
+  CONSTRAINT order_reviews_order_id_fkey FOREIGN KEY (order_id) REFERENCES public.orders(id)
+);
+CREATE TABLE public.order_status (
+  id integer NOT NULL DEFAULT nextval('order_status_id_seq'::regclass),
+  nama character varying NOT NULL,
+  deskripsi text,
+  created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT order_status_pkey PRIMARY KEY (id)
+);
+CREATE TABLE public.order_tracking (
+  id integer NOT NULL DEFAULT nextval('order_tracking_id_seq'::regclass),
+  order_id integer,
+  status_id integer,
+  notes text,
+  created_by integer,
+  created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT order_tracking_pkey PRIMARY KEY (id),
+  CONSTRAINT order_tracking_status_id_fkey FOREIGN KEY (status_id) REFERENCES public.order_status(id),
+  CONSTRAINT order_tracking_created_by_fkey FOREIGN KEY (created_by) REFERENCES public.users(id),
+  CONSTRAINT order_tracking_order_id_fkey FOREIGN KEY (order_id) REFERENCES public.orders(id)
+);
+CREATE TABLE public.orders (
+  id integer NOT NULL DEFAULT nextval('orders_id_seq'::regclass),
+  user_id integer,
+  order_number character varying NOT NULL UNIQUE,
+  total_amount numeric NOT NULL,
+  status_id integer DEFAULT 1,
+  shipping_address_id integer,
+  notes text,
+  created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+  updated_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+  voucher_id integer,
+  discount_amount numeric DEFAULT 0,
+  voucher_code character varying,
+  original_amount numeric,
+  CONSTRAINT orders_pkey PRIMARY KEY (id),
+  CONSTRAINT orders_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id),
+  CONSTRAINT orders_shipping_address_id_fkey FOREIGN KEY (shipping_address_id) REFERENCES public.user_addresses(id),
+  CONSTRAINT orders_status_id_fkey FOREIGN KEY (status_id) REFERENCES public.order_status(id),
+  CONSTRAINT orders_voucher_id_fkey FOREIGN KEY (voucher_id) REFERENCES public.vouchers(id)
+);
+CREATE TABLE public.product_photos (
+  id integer NOT NULL DEFAULT nextval('product_photos_id_seq'::regclass),
+  product_id integer,
+  url_foto text NOT NULL,
+  url_foto_1 text,
+  url_foto_2 text,
+  CONSTRAINT product_photos_pkey PRIMARY KEY (id),
+  CONSTRAINT product_photos_product_id_fkey FOREIGN KEY (product_id) REFERENCES public.products(id)
+);
+CREATE TABLE public.products (
+  id integer NOT NULL DEFAULT nextval('products_id_seq'::regclass),
+  nama_produk character varying NOT NULL,
+  harga numeric NOT NULL,
+  stok integer NOT NULL,
+  detail_produk text NOT NULL,
+  created_at timestamp without time zone DEFAULT now(),
+  updated_at timestamp without time zone DEFAULT now(),
+  CONSTRAINT products_pkey PRIMARY KEY (id)
+);
+CREATE TABLE public.provinsi (
+  id integer NOT NULL DEFAULT nextval('provinsi_id_seq'::regclass),
+  nama character varying NOT NULL,
+  created_at timestamp without time zone DEFAULT now(),
+  updated_at timestamp without time zone DEFAULT now(),
+  CONSTRAINT provinsi_pkey PRIMARY KEY (id)
+);
+CREATE TABLE public.user_addresses (
+  id integer NOT NULL DEFAULT nextval('user_addresses_id_seq'::regclass),
+  user_id integer,
+  provinsi_id integer,
+  kota_kabupaten_id integer,
+  kecamatan_id integer,
+  nama_desa character varying NOT NULL,
+  rt integer NOT NULL,
+  rw integer NOT NULL,
+  alamat_lengkap text NOT NULL,
+  catatan_alamat text,
+  is_primary boolean DEFAULT false,
+  created_at timestamp without time zone DEFAULT now(),
+  updated_at timestamp without time zone DEFAULT now(),
+  CONSTRAINT user_addresses_pkey PRIMARY KEY (id),
+  CONSTRAINT user_addresses_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id),
+  CONSTRAINT user_addresses_provinsi_id_fkey FOREIGN KEY (provinsi_id) REFERENCES public.provinsi(id),
+  CONSTRAINT user_addresses_kecamatan_id_fkey FOREIGN KEY (kecamatan_id) REFERENCES public.kecamatan(id),
+  CONSTRAINT user_addresses_kota_kabupaten_id_fkey FOREIGN KEY (kota_kabupaten_id) REFERENCES public.kota_kabupaten(id)
+);
+CREATE TABLE public.users (
+  id integer NOT NULL DEFAULT nextval('users_id_seq'::regclass),
+  nama character varying NOT NULL,
+  username character varying NOT NULL UNIQUE,
+  email character varying NOT NULL UNIQUE,
+  password character varying NOT NULL,
+  no_hp numeric NOT NULL,
+  role USER-DEFINED DEFAULT 'USER'::role_enum,
+  created_at timestamp without time zone DEFAULT now(),
+  updated_at timestamp without time zone DEFAULT now(),
+  CONSTRAINT users_pkey PRIMARY KEY (id)
+);
+CREATE TABLE public.voucher_usage (
+  id integer NOT NULL DEFAULT nextval('voucher_usage_id_seq'::regclass),
+  voucher_id integer NOT NULL,
+  user_id integer NOT NULL,
+  order_id integer NOT NULL UNIQUE,
+  nilai_diskon_digunakan numeric NOT NULL,
+  tanggal_digunakan timestamp without time zone DEFAULT now(),
+  CONSTRAINT voucher_usage_pkey PRIMARY KEY (id),
+  CONSTRAINT voucher_usage_voucher_id_fkey FOREIGN KEY (voucher_id) REFERENCES public.vouchers(id),
+  CONSTRAINT voucher_usage_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id),
+  CONSTRAINT voucher_usage_order_id_fkey FOREIGN KEY (order_id) REFERENCES public.orders(id)
+);
+CREATE TABLE public.vouchers (
+  id integer NOT NULL DEFAULT nextval('vouchers_id_seq'::regclass),
+  kode_voucher character varying NOT NULL UNIQUE,
+  nama_voucher character varying NOT NULL,
+  deskripsi text,
+  tipe_diskon character varying NOT NULL CHECK (tipe_diskon::text = ANY (ARRAY['PERCENTAGE'::text, 'FIXED'::text])),
+  nilai_diskon numeric NOT NULL CHECK (nilai_diskon > 0::numeric),
+  minimal_pembelian numeric DEFAULT 0,
+  maksimal_diskon numeric,
+  maksimal_penggunaan integer NOT NULL DEFAULT 1 CHECK (maksimal_penggunaan > 0),
+  jumlah_terpakai integer NOT NULL DEFAULT 0 CHECK (jumlah_terpakai >= 0),
+  tanggal_mulai timestamp without time zone NOT NULL,
+  tanggal_berakhir timestamp without time zone NOT NULL,
+  status boolean DEFAULT true,
+  created_by integer,
+  created_at timestamp without time zone DEFAULT now(),
+  updated_at timestamp without time zone DEFAULT now(),
+  CONSTRAINT vouchers_pkey PRIMARY KEY (id),
+  CONSTRAINT vouchers_created_by_fkey FOREIGN KEY (created_by) REFERENCES public.users(id)
+);

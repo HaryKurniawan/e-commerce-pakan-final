@@ -1,0 +1,26 @@
+.headerr {
+  position: fixed;
+  background-color: #F6F6F6;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  padding: 0px 20px;
+  height: 60px;
+
+}
+
+.header-left{
+    cursor: pointer;
+}
+
+.header-left img{
+    height: 18px;
+}
+.header-page-name{
+    font-weight: 500;
+}
+

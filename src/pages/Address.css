@@ -1,0 +1,221 @@
+
+
+.contain-address{
+  padding-top: 60px;
+  padding-bottom: 20px;
+}
+.address-notes {
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: #efefef;
+  border-radius: 4px;
+  font-size: 12px;
+  border-radius: 10px;
+
+}
+
+.address-notes span {
+  color: #666;
+}
+
+.address-action-button{
+  display: flex;
+}
+
+
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 30px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-title {
+  margin-top: 0;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Form Styles */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+
+.form-select:disabled {
+  background-color: #f8f9fa;
+}
+
+.form-input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+
+.form-textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  resize: vertical;
+}
+
+.form-row {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.form-col {
+  flex: 1;
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.cancel-button {
+  background-color: #6c757d;
+  padding: 10px 20px;
+}
+
+.cancel-button:disabled {
+  cursor: not-allowed;
+}
+
+.submit-button {
+  background-color: #007bff;
+  padding: 10px 20px;
+}
+
+.submit-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+
+.add-address-button{
+  background-color: #ededed;
+  font-size: 14px;
+  font-weight: 500;
+  color: #5b5b5b;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  width: 100%;
+   border: 2px dashed #d2d2d2; /* Warna hitam */
+   cursor: pointer;
+}
+
+.address-list-header{
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.address-card{
+   border: 1px solid #c2c2c2; /*  #d2d2d2; /* Warna hitam */
+border-radius: 20px;
+padding: 16px;
+text-align: center;
+margin-bottom: 10px;
+}
+
+.address-actions{
+  display: flex;
+justify-content: center;
+gap: 10px;
+margin-top: 16px;
+}
+
+.edit-button-addres{
+  padding: 10px 40px;
+  border: none;
+  background-color: #383838;
+  border-radius: 100px;
+  color: #fff;
+  cursor: pointer;
+
+}
+.delete-button-addres{
+  padding: 10px 40px;
+  border: none;
+  border-radius: 100px;
+cursor: pointer;
+  background-color: #ececec;
+
+}
+
+.address-grid{
+  font-size: 12px;
+}
+
+.address-colom{
+  display: flex;
+  justify-content: space-between;
+  margin: 0px;
+  margin-bottom: 6px;
+  background-color: #efefef;
+  padding: 0px 10px;
+  border-radius: 10px;
+}
+
+.primary-badge-address{
+  margin-bottom: 20px;
+  font-size: 12px;
+  background-color: #3d3d3d;
+  padding: 10px;
+  color: #ffffff;
+  border-radius: 100px;
+  margin-top: -4px;
+  font-weight: 400;
+  width: 110px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.address-action-button button{
+  padding: 8px 14px;
+  font-size: 12px;
+  border: none;
+  background-color: #efefef;
+  margin-bottom: 16px;
+  border-radius: 100px;
+  border: 1px solid #c0c0c0;
+  cursor: pointer;
+}

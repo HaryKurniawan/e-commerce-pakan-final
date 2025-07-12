@@ -1,0 +1,45 @@
+.orderdetail-contain{
+    padding-top: 60px;
+
+}
+
+.ordered-number{
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.order-header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.section-title-order-detail{
+    font-size: 16px;
+    font-weight: 500;
+    text-align: start;
+}
+
+.address-info{
+    text-align: start;
+}
+
+.total-amount{
+    font-size: 18px;
+    font-weight: 500;
+    color: black;
+}
+
+.copy-button-order-detail{
+    font-size: 12px;
+    padding: 6px 10px;
+    height: 36px;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.total-section-order-detail{
+    font-size: 18px;
+    font-weight: 500;
+    padding: 20px;
+}

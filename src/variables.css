@@ -1,0 +1,9 @@
+:root {
+  --color-primary: #2C2C2C;        /* Warna tombol Register dan teks penting */
+  --color-secondary: #A1A1A1;      /* Warna teks link "Isi alamat sekarang?" */
+  --color-background: #FFFFFF;     /* Warna latar belakang */
+  --color-input-bg: #F5F5F5;       /* Warna latar belakang input */
+  --color-input-placeholder: #A9A9A9; /* Placeholder text */
+  --color-text: #1C1C1C;           /* Warna teks utama */
+  --color-border: #E0E0E0;         /* Jika ada border tambahan */
+}

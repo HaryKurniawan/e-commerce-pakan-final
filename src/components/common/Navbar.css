@@ -1,0 +1,136 @@
+/* === Desktop Navbar === */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  padding: 0 20px;
+  color: rgb(0, 0, 0);
+}
+
+.nav h3 {
+  font-weight: 500;
+}
+
+.nav .button {
+  margin-left: 1rem;
+  background-color: #3b82f6;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.nav .button:hover {
+  background-color: #2563eb;
+}
+
+/* === Mobile Top Navbar === */
+.mobile-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  z-index: 100;
+}
+
+.mobile-user {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.mobile-cart {
+  font-size: 10px;
+  text-decoration: none;
+  color: #3b82f6;
+  font-weight: 600;
+  display: flex;
+}
+
+.back-nav {
+  cursor: pointer;
+
+}
+
+.mobile-bottom {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #ffffff;
+  border-top: 1px solid #e5e7eb;
+  justify-content: space-around;
+  padding: 0.75rem 0;
+  z-index: 100;
+}
+
+.nav-item {
+  text-decoration: none;
+  color: #6b7280;
+  font-weight: 500;
+  line-height: 1px;
+  font-size: 12px;
+}
+
+.nav-item.active {
+  color: #242424;
+}
+
+.nav-item img{
+  height: 20px;
+  width: 20px;
+}
+
+.nav-item.active img {
+  filter: grayscale(100%) brightness(0.2);
+}
+
+
+
+.cart-count-icon{
+  height: 16px;
+  width: 16px;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100px;
+  background-color: #f81d1d;
+  margin-top: -6px;
+  margin-left: -10px;
+}
+/* === Responsive Rules === */
+@media screen and (max-width: 768px) {
+  .desktop-nav {
+    display: none;
+  }
+
+  .mobile-top {
+    display: flex;
+    height: 40px;
+    background-color: #F6F6F6;
+  }
+
+  .mobile-bottom {
+    display: flex;
+    height: 46px;
+    font-size: 14px;
+    justify-content: center;
+    align-items: center;
+    gap: 12%;
+
+  }
+
+  /* Bottom nav disembunyikan saat di halaman produk detail */
+  .hide-mobile-bottom {
+    display: none !important;
+  }
+}

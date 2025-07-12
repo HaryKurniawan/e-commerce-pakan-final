@@ -1,0 +1,139 @@
+/* NotificationToast.css */
+.notification-toast {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-100px);
+  z-index: 1000;
+  min-width: 300px;
+  max-width: 90vw;
+  background: white;
+  border-radius: 12px;
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  border-left: 4px solid;
+}
+
+.notification-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.notification-toast.success {
+  border-left-color: #10b981;
+  background: linear-gradient(135deg, #ecfdf5 0%, #f0fdf4 100%);
+}
+
+.notification-toast.error {
+  border-left-color: #ef4444;
+  background: linear-gradient(135deg, #fef2f2 0%, #fef7f7 100%);
+}
+
+.notification-content {
+  display: flex;
+  align-items: flex-start;
+  padding: 16px 20px;
+  gap: 12px;
+}
+
+.notification-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.notification-message {
+  flex: 1;
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+.notification-toast.success .notification-message {
+  color: #065f46;
+}
+
+.notification-toast.error .notification-message {
+  color: #991b1b;
+}
+
+.notification-progress {
+  height: 3px;
+  background: rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0;
+  animation: progressAnimation 3s linear forwards;
+}
+
+.notification-toast.success .progress-bar {
+  background: #10b981;
+}
+
+.notification-toast.error .progress-bar {
+  background: #ef4444;
+}
+
+@keyframes progressAnimation {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0;
+  }
+}
+
+/* Mobile responsive */
+@media (max-width: 480px) {
+  .notification-toast {
+    left: 10px;
+    right: 10px;
+    transform: translateY(-100px);
+    min-width: auto;
+  }
+  
+  .notification-toast.show {
+    transform: translateY(0);
+  }
+  
+  .notification-content {
+    padding: 14px 16px;
+    gap: 10px;
+  }
+  
+  .notification-message {
+    font-size: 13px;
+  }
+  
+  .notification-icon {
+    font-size: 18px;
+  }
+}
+
+/* Animation for slide in from top */
+@keyframes slideInFromTop {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@keyframes slideOutToTop {
+  from {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-100px);
+  }
+}

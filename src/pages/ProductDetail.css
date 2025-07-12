@@ -1,0 +1,282 @@
+:root {
+  --color-secondary: #A1A1A1;           /* Warna teks link "Isi alamat sekarang?" */
+  --color-background: #F6F6F6;          /* Warna latar belakang -----*/
+  --color-primary: #2C2C2C;             /* Warna tombol Register dan teks penting ------ */
+  --color-text: #71726F;                /* Warna teks utama ------ */
+  --color-background-component: #ffff;  /* Warna latar belakang --- */
+  --color-border: #D9D9D9;              /* Jika ada border tambahan  */ 
+}
+
+.product-detail-container{
+  padding-top: 60px;
+  text-align: start;
+  padding-bottom: 70px;
+}
+
+.action-buttonss {
+  position: fixed;
+  bottom: 0px; 
+  left: 0px;   /* Gunakan left dengan nilai margin yang diinginkan */
+  right: 0px;  /* Gunakan right dengan nilai margin yang diinginkan */
+  z-index: 1000; 
+  display: flex;
+  background-color: aqua;
+  background: linear-gradient(to bottom, transparent, white);
+  padding: 20px 20px;  /* Padding hanya untuk top/bottom */
+  gap: 10px;
+  box-sizing: border-box;
+}
+
+.btn-to-buy{
+  height: 100%;
+  background-color: var(--color-primary);
+  color: #eeeeee;
+  border: none;
+  padding: 14px;
+  width: calc(100% - 50px);
+  border-radius: 100px;
+  font-weight: 500;
+
+}
+.btn-to-cart{
+  color: #eeeeee;
+  height: 50px;
+  width: 50px;
+  border: none;
+  border-radius: 100px;
+  background-color: var(--color-primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+
+.modal-product-info{
+  display: flex;
+}
+
+.contain-top-detail{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  height: 32px;
+}
+
+.contain-detail-produk{
+  width: 100%;
+  text-align: justify;
+  font-size: 12px;
+}
+.product-price-detail{
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.product-title-detail{
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.contain-top-detail p{
+  font-size: 14px;
+}
+
+.modal-quantity-controls{
+  display: flex;
+}
+
+.modal-action-to-checkout{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 20px;
+}
+
+.modal-action-to-checkout p{
+  margin-top: -16px;
+}
+
+.modal-content-top{
+  display: flex;
+  width: 100%;
+}
+
+.modal-product-imagee{
+  width: 100px;
+  height: 100px;
+  border: 1px solid #656464;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.modal-content-bottom{
+  display: flex;
+  justify-content: space-between;
+}
+/* Review Section Styles */
+.reviews-section {
+  margin-top: 2rem;
+}
+
+.reviews-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.reviews-list-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.view-all-reviews-btn {
+  background: none;
+  border: none;
+  color: #2d2d2d;
+  cursor: pointer;
+  font-size: 12px;
+  text-decoration: underline;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+
+.reviews-cards-container {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding: 1rem 0;
+  scroll-behavior: smooth;
+}
+
+.review-card {
+  background: #fff;
+  border: 1px solid #f1f1f1;
+  border-radius: 16px;
+  padding: 1rem;
+  max-width: 320px;
+  flex-shrink: 0;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.review-card:hover {
+  transform: translateY(-2px);
+}
+
+.review-user-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.25rem;
+}
+
+.review-rating {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.review-rating-text {
+  font-size: 0.75rem;
+  color: #666;
+}
+
+.review-date {
+  font-size: 0.75rem;
+  color: #888;
+}
+
+.review-content {
+  font-size: 12px;
+  color: #555;
+  line-height: 1.4;
+}
+
+.review-purchase-info {
+  font-size: 12px;
+  font-weight: 500;
+  color: #888;
+}
+
+.no-reviews-message {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+}
+
+.loading-reviews {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 2rem;
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #007bff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.star {
+  color: #ddd;
+  transition: color 0.2s;
+}
+
+.star-gold {
+  color: #ffd700;
+}
+
+.star-gray {
+  color: #ddd;
+}
+
+.text-secondary {
+  color: #666;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .reviews-cards-container {
+    gap: 0.75rem;
+  }
+  
+  .review-card {
+    min-width: 250px;
+    max-width: 280px;
+  }
+  
+
+  
+  .view-all-reviews-btn {
+    align-self: flex-end;
+  }
+}
+
+@media (max-width: 480px) {
+  .review-card {
+    min-width: 300px;
+    max-width: 350px;
+  }
+  
+
+}
+
+.top-card-review{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
