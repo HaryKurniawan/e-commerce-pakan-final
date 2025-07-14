@@ -1,20 +1,11 @@
-/* Register Page Styling */
-.register-main-container {
-  max-width: 450px;
-  padding: 2rem;
-  background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  margin-top: 100px;
-}
+
 
 .register-main-container h3 {
   text-align: center;
   margin-bottom: 2rem;
   color: #1f2937;
-  font-size: 1.75rem;
-  font-weight: 600;
+  font-size: 12px;
+  font-weight: 500;
 }
 
 /* Form Container */
@@ -26,14 +17,10 @@
 
 /* Regular Input Fields */
 .register-text-field {
-  width: 100%;
-  padding: 0.875rem 1rem;
   border: none;
   border-radius: 50px;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-  box-sizing: border-box;
-  background-color: #f3f4f6;
+  background-color: #FFFFFF;
+  border: 1px solid #ECECEC;
 }
 
 .register-text-field:focus {
@@ -55,12 +42,12 @@
 .register-password-input {
   width: 100%;
   padding: 0.875rem 3rem 0.875rem 1rem;
-  border: none;
+  border: 1px solid #ECECEC;
   border-radius: 50px;
   font-size: 1rem;
   transition: all 0.3s ease;
   box-sizing: border-box;
-  background-color: #f3f4f6;
+  background-color: #ffffff;
 }
 
 .register-password-input:focus {
@@ -100,22 +87,18 @@
 .register-submit-button {
   width: 100%;
   padding: 0.875rem 1rem;
-  background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
-  color: white;
+  background: #272727;
+  color: #ffffff;
   border: none;
   border-radius: 50px;
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: 12px;
+  font-weight: 400;
   cursor: pointer;
   transition: all 0.3s ease;
   margin-top: 0.5rem;
 }
 
-.register-submit-button:hover:not(:disabled) {
-  background: linear-gradient(135deg, #4b5563 0%, #374151 100%);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(107, 114, 128, 0.4);
-}
+
 
 .register-submit-button:active:not(:disabled) {
   transform: translateY(0);
@@ -131,16 +114,17 @@
 /* Login Redirect Text */
 .register-login-redirect {
   text-align: center;
-  color: #6b7280;
-  font-size: 0.875rem;
+  color: #292929;
+  font-size: 14px;
   margin-top: 1.5rem;
 }
 
 .register-login-redirect a {
-  color: #6b7280;
-  text-decoration: none;
-  font-weight: 600;
+  color: #1c1c1c;
+  text-decoration: underline;
+  font-weight: 500;
   transition: color 0.2s ease;
+  margin-left: 4px;
 }
 
 .register-login-redirect a:hover {
@@ -152,20 +136,19 @@
 @media (max-width: 480px) {
   .register-main-container {
     margin: 1rem;
-    padding: 1.5rem;
     max-width: none;
     margin-top: 50px;
   }
   
   .register-main-container h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
+    font-size: 22px;
+    font-weight: 500;
   }
   
   .register-text-field,
   .register-password-input {
-    padding: 0.75rem;
-    font-size: 0.875rem;
+    padding: 14px 18px;
+    font-size: 12px;
   }
   
   .register-password-input {
@@ -173,8 +156,10 @@
   }
   
   .register-submit-button {
-    padding: 0.75rem;
-    font-size: 0.875rem;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 100px;
+    margin-top: 20px;
   }
   
   .register-form-wrapper {
@@ -188,37 +173,6 @@
   100% { transform: rotate(360deg); }
 }
 
-.register-submit-button:disabled::after {
-  content: '';
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  margin-left: 8px;
-  border: 2px solid #ffffff;
-  border-radius: 50%;
-  border-top-color: transparent;
-  animation: spin 1s linear infinite;
-}
-
-/* Focus styles for accessibility */
-.register-text-field:focus,
-.register-password-input:focus,
-.register-submit-button:focus,
-.register-login-redirect a:focus {
-  outline: 2px solid #6b7280;
-  outline-offset: 2px;
-}
-
-/* Form validation styles */
-.register-text-field:invalid:not(:placeholder-shown),
-.register-password-input:invalid:not(:placeholder-shown) {
-  background-color: #fef2f2;
-}
-
-.register-text-field:valid:not(:placeholder-shown),
-.register-password-input:valid:not(:placeholder-shown) {
-  background-color: #f0fdf4;
-}
 
 /* Enhanced visual feedback */
 .register-form-wrapper > * {
@@ -234,4 +188,152 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+
+
+/* Mobile Email Verification Container */
+.register-main-container {
+  min-height: 100vh;
+}
+
+.email-verification-container {
+  background: white;
+  border-radius: 12px;
+  padding: 28px 20px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e2e8f0;
+}
+
+/* Icon */
+.email-verification-icon {
+  margin-bottom: 18px;
+  display: flex;
+  justify-content: center;
+}
+
+/* Typography */
+.email-verification-container h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1a202c;
+  margin: 0 0 18px 0;
+}
+
+.verification-message {
+  font-size: 16px;
+  color: #4a5568;
+  margin: 0 0 14px 0;
+  line-height: 1.5;
+}
+
+.verification-message strong {
+  color: #2d3748;
+  font-weight: 600;
+}
+
+.verification-instructions {
+  font-size: 14px;
+  color: #718096;
+  margin: 0 0 24px 0;
+  line-height: 1.6;
+}
+
+/* Action Buttons */
+.verification-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.resend-email-btn {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  min-height: 44px;
+}
+
+.resend-email-btn:hover:not(:disabled) {
+  background: #45a049;
+  transform: translateY(-1px);
+}
+
+.resend-email-btn:disabled {
+  background: #a0aec0;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.back-to-form-btn {
+  background: transparent;
+  color: #4a5568;
+  border: 1px solid #e2e8f0;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 44px;
+}
+
+.back-to-form-btn:hover {
+  background: #f7fafc;
+  border-color: #cbd5e0;
+  transform: translateY(-1px);
+}
+
+/* Spinning animation */
+.spinning {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Footer */
+.verification-footer {
+  padding-top: 20px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.verification-footer p {
+  font-size: 14px;
+  color: #718096;
+  margin: 0;
+}
+
+.login-link {
+  color: #4CAF50;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.login-link:hover {
+  color: #45a049;
+  text-decoration: underline;
+}
+
+.login-link{
+  padding-top: 10px;
+  color: #000000;
+  text-decoration: underline;
+  cursor: pointer;
 }
