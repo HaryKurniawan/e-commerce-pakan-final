@@ -5,7 +5,6 @@ import { useAuth } from '../../context/AuthContext';
 import { authAPI } from '../../services/authAPI';
 import ModalResendLimit from '../../components/ModalResendLimit';
 import './Register.css';
-import 'antd/dist/reset.css'; // Ant Design style reset
 
 const Register = () => {
   const [formData, setFormData] = useState({
