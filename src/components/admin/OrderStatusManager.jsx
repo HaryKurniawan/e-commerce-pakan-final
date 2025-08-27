@@ -9,6 +9,7 @@ const OrderStatusManager = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [selectedPaymentProof, setSelectedPaymentProof] = useState(null);
 
   useEffect(() => {
     loadInitialData();
@@ -163,6 +164,45 @@ const OrderStatusManager = () => {
     await loadInitialData();
   };
 
+  // Handler untuk melihat bukti pembayaran
+  const handleViewPaymentProof = (order) => {
+    if (!order.payment_proof_url) {
+      alert('Tidak ada bukti pembayaran yang tersedia untuk pesanan ini.');
+      return;
+    }
+    
+    setSelectedPaymentProof({
+      orderNumber: order.order_number,
+      customerName: order.users?.nama || 'Tidak Diketahui',
+      imageUrl: order.payment_proof_url,
+      filename: order.payment_proof_filename
+    });
+  };
+
+  // Handler untuk menutup modal bukti pembayaran
+  const handleClosePaymentProof = () => {
+    setSelectedPaymentProof(null);
+  };
+
+  // Handler untuk download bukti pembayaran
+  const handleDownloadPaymentProof = async (imageUrl, filename) => {
+    try {
+      const response = await fetch(imageUrl);
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = filename || 'bukti-pembayaran.jpg';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error('Error downloading payment proof:', error);
+      alert('Gagal mengunduh bukti pembayaran. Silakan coba lagi.');
+    }
+  };
+
   if (loading && orders.length === 0) {
     return (
       <div className="admin-orders">
@@ -258,6 +298,7 @@ const OrderStatusManager = () => {
               <th>No. Telepon</th>
               <th>Alamat Pengiriman</th>
               <th>Status Saat Ini</th>
+              <th>Bukti Transfer</th>
               <th>Ubah Status</th>
             </tr>
           </thead>
@@ -290,6 +331,21 @@ const OrderStatusManager = () => {
                         {isStatusFinal && ' 🔒'}
                       </span>
                     </td>
+                    <td className="payment-proof">
+                      {order.payment_proof_url ? (
+                        <button
+                          onClick={() => handleViewPaymentProof(order)}
+                          className="view-payment-proof-btn"
+                          title="Lihat bukti pembayaran"
+                        >
+                          📷 Lihat Bukti
+                        </button>
+                      ) : (
+                        <span className="no-payment-proof" title="Belum ada bukti pembayaran">
+                          ❌ Belum Ada
+                        </span>
+                      )}
+                    </td>
                     <td>
                       {isStatusFinal ? (
                         <span className="status-locked" title="Status sudah final, tidak dapat diubah">
@@ -315,7 +371,7 @@ const OrderStatusManager = () => {
               })
             ) : (
               <tr>
-                <td colSpan="7" className="no-results">
+                <td colSpan="8" className="no-results">
                   {searchQuery ? 
                     `Tidak ditemukan pesanan dengan kriteria "${searchQuery}"` : 
                     'Tidak ada data pesanan'
@@ -327,7 +383,54 @@ const OrderStatusManager = () => {
         </table>
       </div>
 
-    
+      {/* Modal untuk menampilkan bukti pembayaran */}
+      {selectedPaymentProof && (
+        <div className="payment-proof-modal-overlay" onClick={handleClosePaymentProof}>
+          <div className="payment-proof-modal" onClick={e => e.stopPropagation()}>
+            <div className="modal-header">
+              <h3>Bukti Pembayaran</h3>
+              <button className="close-modal-btn" onClick={handleClosePaymentProof}>×</button>
+            </div>
+            <div className="modal-content">
+              <div className="order-infoo">
+                <p><strong>No. Pesanan:</strong> {selectedPaymentProof.orderNumber}</p>
+                <p><strong>Customer:</strong> {selectedPaymentProof.customerName}</p>
+                {selectedPaymentProof.filename && (
+                  <p><strong>Nama File:</strong> {selectedPaymentProof.filename}</p>
+                )}
+              </div>
+              <div className="payment-proof-image-container">
+                <img 
+                  src={selectedPaymentProof.imageUrl} 
+                  alt={`Bukti pembayaran ${selectedPaymentProof.orderNumber}`}
+                  className="payment-proof-image"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    e.target.nextSibling.style.display = 'block';
+                  }}
+                />
+                <div className="image-error" style={{display: 'none'}}>
+                  ❌ Gagal memuat gambar
+                </div>
+              </div>
+              <div className="modal-actions">
+                <button 
+                  onClick={() => handleDownloadPaymentProof(selectedPaymentProof.imageUrl, selectedPaymentProof.filename)}
+                  className="download-btn"
+                >
+                  📥 Unduh Bukti
+                </button>
+                <button 
+                  onClick={() => window.open(selectedPaymentProof.imageUrl, '_blank')}
+                  className="open-new-tab-btn"
+                >
+                  🔗 Buka di Tab Baru
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

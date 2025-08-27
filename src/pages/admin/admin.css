@@ -2,12 +2,11 @@
 .modern-admin-panel {
   display: flex;
   min-height: 100vh;
-  background-color: #f8fafc;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 .admin-sidebar {
-  width: 280px;
+  width: 240px;
   background: white;
   border-right: 1px solid #e2e8f0;
   display: flex;
@@ -28,16 +27,45 @@
 .sidebar-header h3 {
   margin: 0;
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 500;
   color: #1a202c;
 }
 
 .sidebar-nav {
+  display: flex;
+  flex-direction: column;
   flex: 1;
   padding: 16px 0;
 }
 
+/* Simple Modern Navigation Button */
+.nav-item-admin {
+  padding: 10px 16px;
+  border: none;
+  background: transparent;
+  color: #64748b;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.15s ease;
+  outline: none;
+  margin: 6px 20px;
+}
 
+.nav-item-admin:hover {
+  background-color: #f1f5f9;
+  color: #334155;
+}
+
+.nav-item-admin.active {
+  background-color: #374151;
+  color: #ffffff;
+}
+
+.nav-item-admin.active:hover {
+  background-color: #4b5563;
+}
 
 .nav-icon {
   margin-right: 12px;
@@ -77,9 +105,9 @@
 
 .admin-main {
   flex: 1;
-  margin-left: 280px;
-  padding: 32px;
-  max-width: calc(100vw - 280px);
+  margin-left: 140px;
+  padding: 24px;
+  max-width: calc(100vw - 140px);
   overflow-x: auto;
 }
 
@@ -90,19 +118,19 @@
 
 .content-header {
   margin-bottom: 32px;
+  text-align: start;
 }
 
 .content-header h2 {
-  margin: 0 0 8px 0;
-  font-size: 28px;
-  font-weight: 700;
+  font-size: 20px;
+  font-weight: 500;
   color: #1a202c;
 }
 
 .content-header p {
-  margin: 0;
+  margin-top: -12px;
   color: #64748b;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 /* Override untuk komponen antd */

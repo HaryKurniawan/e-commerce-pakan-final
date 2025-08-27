@@ -7,11 +7,12 @@
   --color-border: #D9D9D9;              /* Jika ada border tambahan  */ 
 }
 
-.product-detail-container{
+.product-detail-container {
   padding-top: 60px;
   text-align: start;
   padding-bottom: 70px;
 }
+
 
 .action-buttonss {
   position: fixed;

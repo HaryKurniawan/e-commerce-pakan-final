@@ -15,14 +15,15 @@ const AdminPanel = () => {
   const { products, createProduct, updateProduct, deleteProduct, loading, fetchProducts } = useProducts();
   const [editingProduct, setEditingProduct] = useState(null);
   const [activeTab, setActiveTab] = useState('products');
+  const [isProductModalVisible, setIsProductModalVisible] = useState(false);
   const { logout } = useAuth();
   const navigate = useNavigate();
 
   const menuItems = [
-    { id: 'products', label: 'Kelola Produk', icon: '📦' },
-    { id: 'locations', label: 'Kelola Lokasi', icon: '📍' },
-    { id: 'orders', label: 'Status Pesanan', icon: '📋' },
-    { id: 'vouchers', label: 'Kelola Voucher', icon: '🎫' },
+    { id: 'products', label: 'Kelola Produk', icon: '' },
+    { id: 'locations', label: 'Kelola Lokasi', icon: '' },
+    { id: 'orders', label: 'Status Pesanan', icon: '' },
+    { id: 'vouchers', label: 'Kelola Voucher', icon: '' },
   ];
 
   const handleLogout = () => {
@@ -52,6 +53,9 @@ const AdminPanel = () => {
       if (fetchProducts) {
         await fetchProducts();
       }
+      
+      // Tutup modal setelah berhasil submit
+      setIsProductModalVisible(false);
     } catch (error) {
       alert('Gagal menyimpan produk: ' + error.message);
     }
@@ -59,10 +63,12 @@ const AdminPanel = () => {
 
   const handleEditProduct = (product) => {
     setEditingProduct(product);
+    setIsProductModalVisible(true); // Buka modal untuk edit
   };
 
   const handleCancelEdit = () => {
     setEditingProduct(null);
+    setIsProductModalVisible(false); // Tutup modal
   };
 
   const handleDeleteProduct = async (productId) => {
@@ -77,6 +83,11 @@ const AdminPanel = () => {
     }
   };
 
+  const handleAddNewProduct = () => {
+    setEditingProduct(null); // Reset editing product
+    setIsProductModalVisible(true); // Buka modal untuk tambah produk baru
+  };
+
   const renderContent = () => {
     switch (activeTab) {
       case 'products':
@@ -85,13 +96,42 @@ const AdminPanel = () => {
             <div className="content-header">
               <h2>Kelola Produk</h2>
               <p>Tambah, edit, dan hapus produk yang tersedia</p>
+              <button 
+                className="add-product-button"
+                onClick={handleAddNewProduct}
+                style={{
+                  backgroundColor: '#1890ff',
+                  color: 'white',
+                  border: 'none',
+                  padding: '10px 20px',
+                  borderRadius: '6px',
+                  cursor: 'pointer',
+                  fontSize: '14px',
+                  fontWeight: '500',
+                  marginTop: '10px'
+                }}
+              >
+                + Tambah Produk Baru
+              </button>
             </div>
-            <ProductForm
-              onSubmit={handleProductSubmit}
-              editingProduct={editingProduct}
-              onCancelEdit={handleCancelEdit}
-              loading={loading}
-            />
+            
+            {/* Modal untuk ProductForm */}
+            <Modal
+              title={editingProduct ? "Edit Produk" : "Tambah Produk Baru"}
+              open={isProductModalVisible}
+              onCancel={handleCancelEdit}
+              footer={null} // Tidak menggunakan footer default, biarkan ProductForm yang handle tombol
+              width={800}
+              destroyOnClose={true}
+            >
+              <ProductForm
+                onSubmit={handleProductSubmit}
+                editingProduct={editingProduct}
+                onCancelEdit={handleCancelEdit}
+                loading={loading}
+              />
+            </Modal>
+
             <AdminProductList
               products={products}
               onEdit={handleEditProduct}
@@ -146,7 +186,7 @@ const AdminPanel = () => {
           {menuItems.map((item) => (
             <button
               key={item.id}
-              className={`nav-item ${activeTab === item.id ? 'active' : ''}`}
+              className={`nav-item-admin ${activeTab === item.id ? 'active' : ''}`}
               onClick={() => setActiveTab(item.id)}
             >
               <span className="nav-icon">{item.icon}</span>

@@ -38,7 +38,7 @@ const AdminProductList = ({ products, onEdit, onDelete }) => {
   return (
     <div className="admin-product-list">
       <div className="list-header">
-        <h3 className="list-title">Manage Products</h3>
+        <h5 className="list-title">Manage Products</h5>
         <div className="product-count">
           {products.length} {products.length === 1 ? 'Product' : 'Products'}
         </div>

@@ -1,5 +1,6 @@
 import { api } from './baseApi.js';
-import { productsAPI } from './productsAPI.js'; // Import productsAPI for stock operations
+import { productsAPI } from './productsAPI.js';
+import { storageAPI } from './baseApi.js';
 
 function generateOrderNumber() {
   const now = new Date();
@@ -14,7 +15,7 @@ function generateOrderNumber() {
 }
 
 export const ordersAPI = {
-  // Fixed createOrder method with better error handling and data validation
+  // Create order with payment proof upload support
   createOrder: async (orderData) => {
     try {
       console.log('Creating order with data:', orderData);
@@ -33,15 +34,13 @@ export const ordersAPI = {
         throw new Error('Order items are required');
       }
 
-      // First, get available order statuses to find the correct ID
+      // Get available order statuses to find the correct ID
       let statusId = 1; // Default
       try {
-        // FIXED: Use correct field name 'nama' instead of 'nama_status'
         const statusResponse = await api.get('/order_status?select=id,nama&order=id.asc');
         const statuses = statusResponse.data;
         console.log('Available order statuses:', statuses);
         
-        // FIXED: Use correct field name 'nama' instead of 'nama_status'
         const pendingStatus = statuses.find(s => 
           s.nama.toLowerCase().includes('pending') || 
           s.nama.toLowerCase().includes('menunggu')
@@ -69,7 +68,7 @@ export const ordersAPI = {
         voucher_code: orderData.voucher_code || null,
         shipping_address_id: parseInt(orderData.shipping_address_id),
         notes: orderData.notes || null,
-        status_id: statusId, // Use the validated status ID
+        status_id: statusId,
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString()
       };
@@ -103,7 +102,7 @@ export const ordersAPI = {
       // Add initial tracking record
       await api.post('/order_tracking', {
         order_id: parseInt(order.id),
-        status_id: statusId, // Use the same validated status ID
+        status_id: statusId,
         notes: 'Pesanan dibuat',
         created_by: parseInt(orderData.user_id),
         created_at: new Date().toISOString()
@@ -142,6 +141,58 @@ export const ordersAPI = {
       } else {
         throw new Error(error.message || 'Unknown error occurred');
       }
+    }
+  },
+
+  // Upload payment proof and update order
+  uploadPaymentProof: async (orderId, userId, paymentProofFile) => {
+    try {
+      console.log('Uploading payment proof for order:', { orderId, userId });
+
+      if (!paymentProofFile) {
+        throw new Error('Payment proof file is required');
+      }
+
+      // Upload payment proof to storage
+      const uploadResult = await storageAPI.uploadPaymentProof(
+        paymentProofFile, 
+        orderId, 
+        userId
+      );
+
+      if (!uploadResult.success) {
+        throw new Error('Failed to upload payment proof to storage');
+      }
+
+      // Update order with payment proof URL
+      const updatePayload = {
+        payment_proof_url: uploadResult.url,
+        payment_proof_filename: uploadResult.path,
+        updated_at: new Date().toISOString()
+      };
+
+      await api.patch(`/orders?id=eq.${orderId}`, updatePayload);
+
+      // Add tracking record for payment proof submission
+      await ordersAPI.addOrderTracking(
+        orderId,
+        1, // Assuming status 1 is pending
+        'Bukti pembayaran telah diupload',
+        userId
+      );
+
+      console.log('Payment proof uploaded and order updated successfully');
+
+      return {
+        success: true,
+        message: 'Bukti pembayaran berhasil diupload',
+        url: uploadResult.url,
+        filename: uploadResult.path
+      };
+
+    } catch (error) {
+      console.error('Error uploading payment proof:', error);
+      throw new Error(`Failed to upload payment proof: ${error.message}`);
     }
   },
 

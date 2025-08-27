@@ -79,20 +79,43 @@ const ReviewsPage = () => {
     }
   };
 
+  // Updated renderStars function with Font Awesome support
   const renderStars = (rating, size = 16) => {
     const stars = [];
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating % 1 >= 0.25; // Lebih sensitif untuk half star
+    
     for (let i = 1; i <= 5; i++) {
-      stars.push(
-        <span 
-          key={i} 
-          className={`star ${i <= rating ? 'star-gold' : 'star-gray'}`}
-          style={{ fontSize: `${size}px` }}
-        >
-          ★
-        </span>
-      );
+      if (i <= fullStars) {
+        // Full star
+        stars.push(
+          <i 
+            key={i} 
+            className="fas fa-star star-filled"
+            style={{ fontSize: `${size}px` }}
+          ></i>
+        );
+      } else if (i === fullStars + 1 && hasHalfStar) {
+        // Half star
+        stars.push(
+          <i 
+            key={i} 
+            className="fas fa-star-half-alt star-half"
+            style={{ fontSize: `${size}px` }}
+          ></i>
+        );
+      } else {
+        // Empty star
+        stars.push(
+          <i 
+            key={i} 
+            className="far fa-star star-empty"
+            style={{ fontSize: `${size}px` }}
+          ></i>
+        );
+      }
     }
-    return stars;
+    return <div className="stars-container">{stars}</div>;
   };
 
   const handleGoBack = () => {
@@ -135,7 +158,7 @@ const ReviewsPage = () => {
         <div className="product-summary">
           <h2>{product.nama_produk}</h2>
           <div className="rating-summary">
-            <div className="stars">{renderStars(Math.round(averageRating.average), 20)}</div>
+            <div className="stars">{renderStars(averageRating.average, 20)}</div>
             <span>{averageRating.average.toFixed(1)} dari {averageRating.count} ulasan</span>
           </div>
         </div>

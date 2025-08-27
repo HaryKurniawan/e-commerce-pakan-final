@@ -1,7 +1,7 @@
-// components/Payment.js
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Copy, Check, CreditCard, Upload, X, ArrowLeft } from 'lucide-react';
+import { notification } from 'antd'; // Import notification dari antd
 import { ordersAPI } from '../services/ordersAPI';
 import { productsAPI } from '../services/productsAPI';
 import { useCart } from '../hooks/useCart';
@@ -36,7 +36,6 @@ const Payment = () => {
   const { applyVoucher } = useVouchers();
   const { fetchProducts } = useProducts();
 
-  const [copiedAccount, setCopiedAccount] = useState(null);
   const [paymentProof, setPaymentProof] = useState(null);
   const [paymentProofPreview, setPaymentProofPreview] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -69,11 +68,18 @@ const Payment = () => {
     }
   }, [orderData, selectedPaymentMethod, navigate]);
 
-  const copyToClipboard = async (text, accountId) => {
+  const copyToClipboard = async (text, accountType) => {
     try {
       await navigator.clipboard.writeText(text);
-      setCopiedAccount(accountId);
-      setTimeout(() => setCopiedAccount(null), 2000);
+      
+      // Tampilkan notification sukses
+      notification.success({
+        message: 'Berhasil Disalin!',
+        description: `${accountType} telah disalin ke clipboard`,
+        placement: 'topRight',
+        duration: 2,
+      });
+      
     } catch (err) {
       console.error('Failed to copy: ', err);
       // Fallback for older browsers
@@ -84,10 +90,25 @@ const Payment = () => {
       textArea.select();
       try {
         document.execCommand('copy');
-        setCopiedAccount(accountId);
-        setTimeout(() => setCopiedAccount(null), 2000);
+        
+        // Tampilkan notification sukses untuk fallback
+        notification.success({
+          message: 'Berhasil Disalin!',
+          description: `${accountType} telah disalin ke clipboard`,
+          placement: 'topRight',
+          duration: 2,
+        });
+        
       } catch (fallbackErr) {
         console.error('Fallback copy failed: ', fallbackErr);
+        
+        // Tampilkan notification error
+        notification.error({
+          message: 'Gagal Menyalin',
+          description: 'Silakan salin secara manual',
+          placement: 'topRight',
+          duration: 3,
+        });
       }
       document.body.removeChild(textArea);
     }
@@ -98,13 +119,23 @@ const Payment = () => {
     if (file) {
       // Check file size (max 5MB)
       if (file.size > 5 * 1024 * 1024) {
-        alert('Ukuran file terlalu besar. Maksimal 5MB');
+        notification.error({
+          message: 'File Terlalu Besar',
+          description: 'Ukuran file maksimal 5MB',
+          placement: 'topRight',
+          duration: 3,
+        });
         return;
       }
 
       // Check file type
       if (!file.type.startsWith('image/')) {
-        alert('Hanya file gambar yang diperbolehkan');
+        notification.error({
+          message: 'Format File Tidak Valid',
+          description: 'Hanya file gambar yang diperbolehkan',
+          placement: 'topRight',
+          duration: 3,
+        });
         return;
       }
 
@@ -116,6 +147,14 @@ const Payment = () => {
         setPaymentProofPreview(e.target.result);
       };
       reader.readAsDataURL(file);
+
+      // Tampilkan notification sukses upload
+      notification.success({
+        message: 'File Berhasil Dipilih',
+        description: 'Bukti pembayaran siap untuk diupload',
+        placement: 'topRight',
+        duration: 2,
+      });
     }
   };
 
@@ -127,11 +166,23 @@ const Payment = () => {
     if (fileInput) {
       fileInput.value = '';
     }
+
+    notification.info({
+      message: 'File Dihapus',
+      description: 'Bukti pembayaran telah dihapus',
+      placement: 'topRight',
+      duration: 2,
+    });
   };
 
   const handlePaymentSubmit = async () => {
     if (!paymentProof) {
-      alert('Silakan upload bukti pembayaran terlebih dahulu');
+      notification.warning({
+        message: 'Bukti Pembayaran Diperlukan',
+        description: 'Silakan upload bukti pembayaran terlebih dahulu',
+        placement: 'topRight',
+        duration: 3,
+      });
       return;
     }
 
@@ -148,6 +199,30 @@ const Payment = () => {
       }
 
       console.log('Order created successfully:', order);
+
+      // Upload payment proof
+      try {
+        const uploadResult = await ordersAPI.uploadPaymentProof(
+          order.id,
+          orderData.user_id,
+          paymentProof
+        );
+
+        if (!uploadResult.success) {
+          throw new Error('Failed to upload payment proof');
+        }
+
+        console.log('Payment proof uploaded successfully:', uploadResult);
+      } catch (uploadError) {
+        console.error('Error uploading payment proof:', uploadError);
+        // Don't fail the entire process, but log the error
+        notification.warning({
+          message: 'Upload Sebagian Berhasil',
+          description: 'Pesanan berhasil dibuat, namun gagal mengupload bukti pembayaran. Silakan hubungi customer service.',
+          placement: 'topRight',
+          duration: 5,
+        });
+      }
 
       // Apply voucher usage if voucher was used
       if (appliedVoucher && discountAmount > 0) {
@@ -188,26 +263,25 @@ const Payment = () => {
       await fetchProducts();
       console.log('Products data refreshed');
 
-      // Show success message
-      let successMessage = `Pembayaran berhasil disubmit!\n\nNomor Pesanan: ${order.order_number || orderData.order_number}\nMetode Pembayaran: ${selectedPaymentMethod.name}`;
-
-      if (appliedVoucher && discountAmount > 0) {
-        successMessage += `\n\nSubtotal: Rp ${Number(totalAmount).toLocaleString()}`;
-        successMessage += `\nDiskon (${appliedVoucher.kode_voucher}): -Rp ${Number(discountAmount).toLocaleString()}`;
-      }
-
-      successMessage += `\nTotal: Rp ${Number(finalAmount || totalAmount).toLocaleString()}`;
-      successMessage += `\n\nBukti pembayaran akan diverifikasi dalam 1x24 jam.`;
-      successMessage += `\nStatus: Menunggu verifikasi pembayaran`;
-
-      alert(successMessage);
+      // Show success notification
+      notification.success({
+        message: 'Pembayaran Berhasil Disubmit!',
+        description: `Nomor Pesanan: ${order.order_number || orderData.order_number}. Bukti pembayaran akan diverifikasi dalam 1x24 jam.`,
+        placement: 'topRight',
+        duration: 5,
+      });
       
       // Navigate to orders page
       navigate('/orders');
       
     } catch (error) {
       console.error('Payment submission error:', error);
-      alert(`Terjadi kesalahan saat memproses pembayaran: ${error.message}`);
+      notification.error({
+        message: 'Gagal Memproses Pembayaran',
+        description: error.message,
+        placement: 'topRight',
+        duration: 4,
+      });
     } finally {
       setIsProcessing(false);
     }
@@ -249,15 +323,11 @@ const Payment = () => {
                   </p>
                 </div>
                 <button
-                  onClick={() => copyToClipboard(selectedPaymentMethod.accountNumber, selectedPaymentMethod.id)}
+                  onClick={() => copyToClipboard(selectedPaymentMethod.accountNumber, 'Nomor rekening')}
                   className="copy-button"
                   title="Salin nomor rekening"
                 >
-                  {copiedAccount === selectedPaymentMethod.id ? (
-                    <Check className="copy-icon success" />
-                  ) : (
-                    <Copy className="copy-icon" />
-                  )}
+                  <Copy className="copy-icon" />
                 </button>
               </div>
             </div>
@@ -267,14 +337,6 @@ const Payment = () => {
               <p className="account-label">Atas Nama</p>
               <p className="account-name-text">{selectedPaymentMethod.accountName}</p>
             </div>
-
-            {/* Copy Status */}
-            {copiedAccount === selectedPaymentMethod.id && (
-              <div className="copy-success-message">
-                <Check className="success-icon" />
-                Nomor rekening berhasil disalin!
-              </div>
-            )}
           </div>
         </div>
 
@@ -318,7 +380,7 @@ const Payment = () => {
           ) : (
             <div className="preview-container">
               <div className="preview-header">
-                <h4>Preview Bukti Pembayaran</h4>
+                <h4>Preview</h4>
                 <button
                   onClick={removePaymentProof}
                   className="remove-button"
@@ -347,15 +409,13 @@ const Payment = () => {
         <div className="upload-instructions">
           <h5>Petunjuk Upload:</h5>
           <ul>
-            <li>• Pastikan bukti transfer terlihat jelas</li>
-            <li>• Nominal transfer harus sesuai dengan total pembayaran</li>
-            <li>• Sertakan nama pengirim dan nomor rekening tujuan</li>
-            <li>• Bukti pembayaran akan diverifikasi dalam 1x24 jam</li>
+            <li>Pastikan bukti transfer terlihat jelas</li>
+            <li>Nominal transfer harus sesuai dengan total pembayaran</li>
+            <li>Sertakan nama pengirim dan nomor rekening tujuan</li>
+            <li>Bukti pembayaran akan diverifikasi dalam 1x24 jam</li>
           </ul>
         </div>
       </div>
-
-     
 
       {/* Submit Button */}
       <div className="payment-submit-section">
